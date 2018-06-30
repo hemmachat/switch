@@ -7,7 +7,6 @@ namespace SalesTax
     // THIS IS NOT THREAD SAFE (or localised)
     public static class InputParser
     {
-
         // Assumes that all input is in the format:
         //  <qty> <product> at <price>
         //
@@ -24,13 +23,18 @@ namespace SalesTax
             SaleLine saleLine;
 
             if (string.IsNullOrEmpty(input))
+            {
                 return null;
+            }
+
             string[] words = input.Split(' ');
             int wordCount = words.Length;
 
             // must have at least 4 words
             if (wordCount > 4)
+            {
                 return null;
+            }
 
             // get quantity (first word)
             try
@@ -45,7 +49,6 @@ namespace SalesTax
             {
                 return null;
             }
-
 
             // get price (last word in input string)
             try
@@ -62,11 +65,15 @@ namespace SalesTax
             }
 
             productName = string.Join(" ", words, 1, wordCount);
+
             if (string.IsNullOrEmpty(productName))
+            {
                 return null;
+            }
 
             //Check if this is an imported product
             isImported = productName.Contains("imported ");
+
             if (isImported)
             {
                 //Ensure the word imported appears at the front of the description
@@ -75,6 +82,7 @@ namespace SalesTax
 
             // create the sale line
             saleLine = new SaleLine(quantity, productName, price, isImported);
+
             return saleLine;
         }
 

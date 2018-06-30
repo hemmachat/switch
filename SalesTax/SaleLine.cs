@@ -63,7 +63,11 @@ namespace SalesTax
         public SaleLine(int lineQuantity, string name, decimal unitPrice, bool itemIsImported)
         {
             int taxRate;
-            if (string.IsNullOrEmpty(name)) name = string.Empty;
+
+            if (string.IsNullOrEmpty(name))
+            {
+                name = string.Empty;
+            }
 
             quantity = lineQuantity;
             productName = name;
@@ -74,16 +78,23 @@ namespace SalesTax
             // calculate taxable amount
             // ideally should really have a product list and tax rules, but this'll have to do for the exercise.
             if (productName.Contains("book") || productName.Contains("tablet") || productName.Contains("chip"))
+            {
                 taxRate = 0;  //No base tax applicable for books, medicals items or food
+            }
             else
+            {
                 taxRate = 10; //10% base tax or general products
+            }
+
             if (isImported)
+            {
                 taxRate = 5; //5% regardless for any imported items
+            }
 
             taxAmount = CalculateTax(lineValue,taxRate);
+
             //Add tax to line value
             lineValue += taxAmount;
-            return;
         }
 
         /// <summary>
@@ -101,8 +112,12 @@ namespace SalesTax
 
             //Now round up to nearest 5 cents.
             remainder = amount % .05;
+
             if (remainder > 0)
+            {
                 amount += .05 - remainder;
+            }
+
             return (decimal)amount;
         }
 

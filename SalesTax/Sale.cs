@@ -18,11 +18,11 @@ namespace SalesTax
         public bool Add(string inputLine)
         {
             SaleLine saleLine;
-
             saleLine = InputParser.ProcessInput(inputLine);
             saleLines.Add(saleLine);
             totalTax += saleLine.Tax;
             totalValue += saleLine.LineValue;
+
             return true;
         }
 
@@ -53,14 +53,19 @@ namespace SalesTax
             foreach (SaleLine line in saleLines)
             {
                 if (output.Length > 0)
+                {
                     output.Append("\n");
+                }
+
                 output.Append(line.ToString());
             }
+
             //Now add footer information
             output.Append("\n");
             output.AppendFormat("Sales Taxes: {0:#,##0.00}", Tax);
             output.Append("\n");
             output.AppendFormat("Total: {0:#,##0.00}", TotalValue);
+
             return output.ToString();
         }
     }
