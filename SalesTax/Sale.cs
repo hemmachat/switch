@@ -10,6 +10,11 @@ namespace SalesTax
         private decimal totalTax;
         private decimal totalValue;
 
+        public Sale()
+        {
+            saleLines = new List<SaleLine>();
+        }
+
         /// <summary>
         /// Adds a line to the sale.
         /// </summary>
@@ -17,8 +22,13 @@ namespace SalesTax
         /// <returns>True for success, False for failure.  Failures are usually caused via incorrect formatting of the input</returns>
         public bool Add(string inputLine)
         {
-            SaleLine saleLine;
-            saleLine = InputParser.ProcessInput(inputLine);
+            SaleLine saleLine = InputParser.ProcessInput(inputLine);
+
+            if (saleLine == null)
+            {
+                return false;
+            }
+
             saleLines.Add(saleLine);
             totalTax += saleLine.Tax;
             totalValue += saleLine.LineValue;

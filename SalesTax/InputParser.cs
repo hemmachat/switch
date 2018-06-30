@@ -31,7 +31,7 @@ namespace SalesTax
             int wordCount = words.Length;
 
             // must have at least 4 words
-            if (wordCount > 4)
+            if (wordCount < 4)
             {
                 return null;
             }
@@ -64,7 +64,7 @@ namespace SalesTax
                 return null;
             }
 
-            productName = string.Join(" ", words, 1, wordCount);
+            productName = string.Join(" ", words, 1, wordCount - 3);
 
             if (string.IsNullOrEmpty(productName))
             {

@@ -77,7 +77,7 @@ namespace SalesTax
 
             // calculate taxable amount
             // ideally should really have a product list and tax rules, but this'll have to do for the exercise.
-            if (productName.Contains("book") || productName.Contains("tablet") || productName.Contains("chip"))
+            if (productName.Contains("book") || productName.Contains("tablet") || productName.Contains("chip") || productName.Contains("chocolate"))
             {
                 taxRate = 0;  //No base tax applicable for books, medicals items or food
             }
@@ -88,7 +88,7 @@ namespace SalesTax
 
             if (isImported)
             {
-                taxRate = 5; //5% regardless for any imported items
+                taxRate += 5; //5% regardless for any imported items
             }
 
             taxAmount = CalculateTax(lineValue,taxRate);
